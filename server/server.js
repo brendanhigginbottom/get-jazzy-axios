@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = express();
 const PORT = 5001;
+app.use(express.json());
 
 const artistListArray = [
     {
@@ -50,6 +51,11 @@ app.use(express.static('server/public'));
 app.get('/artist', (req, res) => {
     res.send(artistListArray);
 });
+
+app.get('/song', (req, res) => {
+    console.log('GET Request made for /song');
+    res.send(songListArray);
+})
 
 // TODO - Add GET for songs
 
