@@ -55,7 +55,15 @@ app.get('/artist', (req, res) => {
 app.get('/song', (req, res) => {
     console.log('GET Request made for /song');
     res.send(songListArray);
-})
+});
+
+app.post('/song', (req, res) => {
+    console.log('POST equest made for /quotes');
+    console.log(req.body);
+    let songToAdd = req.body;
+    songListArray.push(songToAdd);
+    res.sendStatus(201);
+});
 
 // TODO - Add GET for songs
 

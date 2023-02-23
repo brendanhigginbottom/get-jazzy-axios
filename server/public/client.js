@@ -30,7 +30,8 @@ function getSongs() {
     axios.get('/song').then((response) => {
         console.log(response);
         let songsFromServer = response.data
-        let contentTable = document.querySelector('#songTableBody')
+        let contentTable = document.querySelector('#songTableBody');
+        contentTable.innerHTML = '';
         for (let song of songsFromServer) {
             contentTable.innerHTML += `
                 <tr>
@@ -50,4 +51,19 @@ getSongs();
 function submitForm(event) {
     event.preventDefault();
     console.log('In submitForm');
+    let titleInput = document.querySelector('#songInput').value;
+    let artistInput = document.querySelector('#artistInput').value;
+    console.log('Input is:', titleInput, artistInput);
+    let songFromUser = {
+        title: titleInput,
+        artist: artistInput
+    };
+
+    axios.post('/song', songFromUser).then((response) => {
+        console.log(response);
+        getSongs();
+    }).catch((error) => {
+        console.log(error);
+        alert('Something went wrong.');
+    });
 }
